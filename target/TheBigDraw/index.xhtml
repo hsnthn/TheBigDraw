@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+   <title>THE BIG DRAW</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+	<h:panelGrid columns="2" id="couponPanel">
+	<p:panel header="The Big Draw">
+		<h:panelGrid id="couponPlayPanel" columns="3" cellpadding="5"  >
+			<p:outputLabel for="username" value="Username:" />
+			<p:inputText id="username" value="#{theBigDraw.username}" />
+			<p:message for="username" />
+		
+	        <p:outputLabel for="couponDate" value="Coupon Date:" />
+	        <p:calendar id="couponDate" value="#{theBigDraw.couponDate}" pattern="dd/mm/yyyy" />
+	        <p:message for="couponDate" />
+	        
+        	<p:outputLabel for="coponNumbers" value="Coupon Numbers:" />
+	        <h:panelGrid id="coponNumbers" columns="3" cellpadding="5">
+	        	<p:inputText id="coponNumber" value="#{theBigDraw.couponNumber}" rendered="#{not theBigDraw.isfilledCoupon}" style="width:25px">
+	        		<f:validateDoubleRange minimum="1" maximum="60" />
+	        	</p:inputText>
+	        	<p:message for="coponNumber" />
+	        	
+	        	<p:commandButton value="Add" id="add" update="couponPlayPanel" rendered="#{not theBigDraw.isfilledCoupon}"  action="#{theBigDraw.addCouponNumber}" />
+	        	<p:dataList id="couponNumberList" value="#{theBigDraw.playerNumbers}" var="number" type="ordered">
+					<f:facet name="header">Coupon Numbers</f:facet>
+				    #{number}
+				</p:dataList>
+	        </h:panelGrid>
+	        	
+	        	
+	        <p:outputLabel></p:outputLabel>
+	        
+	        <p:outputLabel></p:outputLabel>
+	        <p:outputLabel></p:outputLabel>
+	        <p:commandButton value="Play" id="play" update="allPlayedCouponsPanel couponPlayPanel" action="#{theBigDraw.addCoupon}" styleClass="ui-priority-primary" />
+	 	</h:panelGrid>
+		</p:panel>
+	 	<p:panel header="Played Coupons" id="playedCouponPanel">
+		 	<h:panelGrid id="allPlayedCouponsPanel" cellpadding="5">
+			    <p:dataTable var="coupon" value="#{theBigDraw.couponList}">
+				    <p:column headerText="Username">
+				        <h:outputText value="#{coupon.username}" />
+				    </p:column>
+				 
+				    <p:column headerText="Date">
+				        <h:outputText value="#{coupon.date}" />
+				    </p:column>
+				 
+				    <p:column headerText="Coupon Numbers">
+				        <h:outputText value="#{coupon.playerNumbers}" />
+				    </p:column>
+				</p:dataTable>
+				<p:commandButton value="Show Draw Result" id="showDrawResult" update="couponPanel resultPanel" action="#{theBigDraw.calculateWinnersAndResults}"   styleClass="ui-priority-primary"/>
+		 	</h:panelGrid>
+	 	</p:panel>
+	 	</h:panelGrid>
+	 	 	<p:panel header="Results" >
+		 	<h:panelGrid id="resultPanel"  cellpadding="5">
+			    <p:dataTable var="result" value="#{theBigDraw.resultList}">
+				    <p:column headerText="Username">
+				        <h:outputText value="#{result.username}" />
+				    </p:column>
+				 
+				    <p:column headerText="Date">
+				        <h:outputText value="#{result.couponDate}" />
+				    </p:column>
+				 
+				    <p:column headerText="Coupon Numbers">
+				        <h:outputText value="#{result.playerNumbers}" />
+				    </p:column>
+				 
+				    <p:column headerText="winnigPrize">
+				        <h:outputText value="#{result.winnigPrize}" />
+				    </p:column>
+				 
+				    <p:column headerText="drawDate">
+				        <h:outputText value="#{result.drawDate}" />
+				    </p:column>
+				 
+				    <p:column headerText="drawNumbers">
+				        <h:outputText value="#{result.drawNumbers}" />
+				    </p:column>
+				</p:dataTable>
+		 	</h:panelGrid>
+	 	</p:panel>
+	</h:form>
+</h:body>
+</html>

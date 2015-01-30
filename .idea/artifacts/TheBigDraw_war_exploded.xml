@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="TheBigDraw:war exploded">
+    <output-path>$PROJECT_DIR$/target/TheBigDraw</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="TheBigDraw" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.10" />
+          <element id="library" level="project" name="Maven: org.mockito:mockito-all:1.9.5" />
+          <element id="library" level="project" name="Maven: org.primefaces:primefaces:5.1" />
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-api:2.2.9" />
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-impl:2.2.9" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-collections4:4.0" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="D:\github\TheBigDraw\target/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="TheBigDraw/web/Web" />
+    </root>
+  </artifact>
+</component>
